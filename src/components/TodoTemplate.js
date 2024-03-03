@@ -1,4 +1,4 @@
-import './TodoTemplate.css';
+import './TodoTemplate.scss';
 
 const TodoTemplate = ({ children }) => {
   return (
