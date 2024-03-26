@@ -44,10 +44,22 @@ const App = () => {
     [todos],
   );
 
+  const onToggle = useCallback(
+    (id) => {
+      setTodos(
+        todos.map(
+          (todo) =>
+            todo.id === id ? { ...todo, checked: !todo.checked } : todo, // 기존의 todos 요소들의 id 중 인자로 받아온 id와 일치한 애만 checked 토글 진행
+        ),
+      );
+    },
+    [todos],
+  );
+
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />
-      <TodoList todos={todos} onRemove={onRemove} />
+      <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
     </TodoTemplate>
   );
 };
