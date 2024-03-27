@@ -23,37 +23,27 @@ const App = () => {
 
   const nextId = useRef(4);
 
-  const onInsert = useCallback(
-    (text) => {
-      const todo = {
-        id: nextId.current,
-        text,
-        checked: false,
-      };
-      setTodos(todos.concat(todo)); // 기존 배열에 todo 데이터를 이어붙여 새로운 배열로 반환
-      nextId.current += 1;
-    },
-    [todos],
-  );
+  const onInsert = useCallback((text) => {
+    const todo = {
+      id: nextId.current,
+      text,
+      checked: false,
+    };
+    setTodos((todos) => todos.concat(todo)); // 기존 배열에 todo 데이터를 이어붙여 새로운 배열로 반환
+    nextId.current += 1;
+  }, []);
 
-  const onRemove = useCallback(
-    (id) => {
-      setTodos(todos.filter((todo) => todo.id !== id));
-    },
-    [todos],
-  );
+  const onRemove = useCallback((id) => {
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  }, []);
 
-  const onToggle = useCallback(
-    (id) => {
-      setTodos(
-        todos.map(
-          (todo) =>
-            todo.id === id ? { ...todo, checked: !todo.checked } : todo, // 기존의 todos 요소들의 id 중 인자로 받아온 id와 일치한 애만 checked 토글 진행
-        ),
-      );
-    },
-    [todos],
-  );
+  const onToggle = useCallback((id) => {
+    setTodos((todos) =>
+      todos.map(
+        (todo) => (todo.id === id ? { ...todo, checked: !todo.checked } : todo), // 기존의 todos 요소들의 id 중 인자로 받아온 id와 일치한 애만 checked 토글 진행
+      ),
+    );
+  }, []);
 
   return (
     <TodoTemplate>
