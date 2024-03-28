@@ -1,4 +1,4 @@
-import { useCallback, useReducer, useRef, useState } from 'react';
+import { useCallback, useReducer, useRef } from 'react';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
 import TodoTemplate from './components/TodoTemplate';
@@ -29,6 +29,8 @@ const todoReducer = (todos, action) => {
       return todos.map((todo) =>
         todo.id === action.id ? { ...todo, checked: !todo.checked } : todo,
       );
+    default:
+      return todos;
   }
 };
 
